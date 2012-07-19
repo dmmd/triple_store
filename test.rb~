@@ -1,0 +1,10 @@
+require "/home/dm/triplestore/lib/simple_graph"
+
+include SimpleGraph
+
+graph = Graph.new
+
+graph.add("The Papers of Samuel Tilden", "Written By", "Samuel_Tilden")
+graph.inspect
+
+puts "done"

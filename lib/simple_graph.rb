@@ -15,7 +15,13 @@ module SimpleGraph
     end
 
     def add_to_index(index, a, b, c)
-      index[a.to_sym] = {b.to_sym  => c}
+      if ! index.include? a
+        index[a] = {b => [c]}
+      elsif ! index[a].include? b
+        index[a][b] = [c]
+      else
+        index[a][b].push(c)
+      end
     end
 
     def inspect
@@ -23,6 +29,5 @@ module SimpleGraph
       puts "POS: " << @pos.to_s
       puts "OSP: " << @osp.to_s
     end
-
   end
 end

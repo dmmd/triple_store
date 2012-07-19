@@ -6,6 +6,8 @@ graph = Graph.new
 
 graph.add("The Papers of Samuel Tilden", "Written By", "Samuel_Tilden")
 graph.add("The Papers of Robert Fulton", "Written By", "Robert_Fulton")
+graph.add("The Autobiography of Samuel Tilden", "Written By", "Samuel_Tilden")
+
 graph.inspect
 
 puts "done"

@@ -1,6 +1,8 @@
 
 module SimpleGraph
   class Graph
+    attr_accessor :spo, :pos, :osp
+
     def initialize
       @spo = Hash.new
       @pos = Hash.new
@@ -24,10 +26,33 @@ module SimpleGraph
       end
     end
 
+    def remove(sub, pred, obj)
+      
+    end
+    
+    def remove_from_index(sub, pred, obj)
+    end
+    
     def inspect
       puts "SPO: " << @spo.to_s
       puts "POS: " << @pos.to_s
       puts "OSP: " << @osp.to_s
+    end
+    
+    def triples(sub, pred, obj)
+      if sub != nil
+        if pred != nil
+          if obj != nil
+            if spo[sub][pred].include? obj
+              puts [sub,obj,pred]
+            end
+          end
+        end
+      elsif pred != nil
+        puts "predicate found"
+      elsif obj != nil
+        puts "object found"
+      end
     end
   end
 end

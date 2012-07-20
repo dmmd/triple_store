@@ -40,19 +40,35 @@ module SimpleGraph
     end
     
     def triples(sub, pred, obj)
+      result = Array.new
       if sub != nil
         if pred != nil
           if obj != nil
             if spo[sub][pred].include? obj
-              puts [sub,obj,pred]
+              puts "subject predicate and object"
+              result.push ["sub".to_sym => sub, "pred".to_sym => pred, "obj".to_sym => obj]
             end
-          end
+          else
+            puts "subject and predicate"
+            spo[sub][pred].each{|x| 
+              result.push ["sub".to_sym => sub, "pred".to_sym => pred, "obj".to_sym => x]
+            }
+          end  
+        else
+          puts "subject only"
+          spo[sub].each{|x|
+            pred = x[0]
+            x[1].each{|y| 
+              result.push ["sub".to_sym => sub, "pred".to_sym => pred, "obj".to_sym => y ]
+            } 
+          }
         end
       elsif pred != nil
         puts "predicate found"
       elsif obj != nil
         puts "object found"
       end
+      return result
     end
   end
 end

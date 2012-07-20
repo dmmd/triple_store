@@ -1,3 +1,4 @@
+require 'csv'
 
 module SimpleGraph
   class Graph
@@ -102,6 +103,14 @@ module SimpleGraph
         }
       end
       return result
+    end
+    
+    def load(filename)
+      datas = CSV.read(filename)
+      datas.each do |data|
+        add(data[0], data[1], data[2])
+      end
+      puts 'File loaded'
     end
   end
 end

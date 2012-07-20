@@ -4,6 +4,7 @@ include SimpleGraph
 
 graph = Graph.new
 
+=begin
 graph.add("The Papers of Samuel Tilden", "Written By", "samuel_tilden")
 graph.add("The Papers of Samuel Tilden", "Written By", "some_guy")
 graph.add("The Papers of Samuel Tilden", "Described By", "some_other_gal")
@@ -25,3 +26,9 @@ puts graph.triples("The Papers of Samuel Tilden", nil, nil)
 
 puts "\nall triples"
 puts graph.triples(nil, nil, nil)
+=end
+
+graph.load('./data/movies.csv')
+puts "\nall triples"
+puts graph.triples(nil, nil, "/en/roger_moore")
+

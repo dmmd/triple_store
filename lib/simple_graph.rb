@@ -7,7 +7,7 @@ module SimpleGraph
       @spo = Hash.new
       @pos = Hash.new
       @osp = Hash.new
-      puts "graph initialized"
+      puts "graph initialized\n"
     end
 
     def add(sub, pred, obj)
@@ -27,10 +27,15 @@ module SimpleGraph
     end
 
     def remove(sub, pred, obj)
-      
+     triples(sub, pred, obj).each{|triple|
+       remove_from_index(@spo, triple.sub, triple.pred, triple.obj)
+       remove_from_index(@pos, triple.pred, triple.obj, triple.sub)
+       remove_from_index(@osp, triple.obj, triple.sub, triple.pred)
+     }
     end
     
-    def remove_from_index(sub, pred, obj)
+    def remove_from_index(index, a, b, c)
+      #sigh
     end
     
     def inspect

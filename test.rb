@@ -15,8 +15,6 @@ graph.add("samuel_tilden", "name", "Samuel Tilden")
 graph.add("robert_fulton", "name", "Robert Fulton")
 graph.add("some_other_gal", "name", "Kit Messick")
 
-puts graph.spo.size.to_s << " record in triple store"
-
 puts "\nRemove test"
 puts "initial triples with subj => 'The Papers of Samuel Tilden'"
 puts graph.triples("The Papers of Samuel Tilden", nil, nil)
@@ -24,3 +22,6 @@ puts "\nremoving\n" << graph.triples("The Papers of Samuel Tilden", "Written By"
 graph.remove("The Papers of Samuel Tilden", "Written By", "samuel_tilden")
 puts "\nremaining triples"
 puts graph.triples("The Papers of Samuel Tilden", nil, nil)
+
+puts "\nall triples"
+puts graph.triples(nil, nil, nil)

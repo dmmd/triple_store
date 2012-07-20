@@ -90,6 +90,16 @@ module SimpleGraph
             result.push ["subj".to_sym => subj, "pred".to_sym => y, "obj".to_sym => obj]
           }
         }
+      else
+        spo.each{|x|
+          subj = x[0]
+          x[1].each{|y|
+            pred = y[0]
+            y[1].each{|z|
+              result.push ["subj".to_sym => subj, "pred".to_sym => pred, "obj".to_sym => z]
+            }
+          }
+        }
       end
       return result
     end

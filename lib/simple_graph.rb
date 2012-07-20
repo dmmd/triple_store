@@ -71,7 +71,7 @@ module SimpleGraph
           }
         end
       elsif pred != nil
-        if obj! != nil
+        if obj != nil
           pos[pred][obj].each{|x|
             result.push ["subj".to_sym => x, "pred".to_sym => pred, "obj".to_sym => obj]
           }

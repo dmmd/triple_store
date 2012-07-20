@@ -28,14 +28,14 @@ module SimpleGraph
 
     def remove(sub, pred, obj)
      triples(sub, pred, obj).each{|triple|
-       remove_from_index(@spo, triple.sub, triple.pred, triple.obj)
-       remove_from_index(@pos, triple.pred, triple.obj, triple.sub)
-       remove_from_index(@osp, triple.obj, triple.sub, triple.pred)
+       remove_from_index(@spo, triple[0][:sub], triple[0][:pred], triple[0][:obj])
+       remove_from_index(@pos, triple[0][:pred], triple[0][:obj], triple[0][:sub])
+       remove_from_index(@osp, triple[0][:obj], triple[0][:sub], triple[0][:pred])
      }
     end
     
     def remove_from_index(index, a, b, c)
-      #sigh
+      puts "NOT IMPLEMENTED YET"
     end
     
     def inspect

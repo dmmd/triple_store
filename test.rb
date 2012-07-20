@@ -25,3 +25,9 @@ puts graph.triples(nil, "Written By", "samuel_tilden")
 puts "\n"
 puts graph.triples(nil, nil, "samuel_tilden")
 puts "\ndone"
+
+
+puts "\nRemove test"
+puts graph.triples("The Papers of Samuel Tilden", "Written By", nil)
+graph.remove("The Papers of Samuel Tilden", "Written By", "samuel_tilden")
+puts graph.triples("The Papers of Samuel Tilden", "Written By", nil)

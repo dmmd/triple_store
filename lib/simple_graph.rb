@@ -45,17 +45,17 @@ module SimpleGraph
         if pred != nil
           if obj != nil
             if spo[sub][pred].include? obj
-              puts "subject predicate and object"
+              #puts "subject predicate and object"
               result.push ["sub".to_sym => sub, "pred".to_sym => pred, "obj".to_sym => obj]
             end
           else
-            puts "subject and predicate"
+            #puts "subject and predicate"
             spo[sub][pred].each{|x| 
               result.push ["sub".to_sym => sub, "pred".to_sym => pred, "obj".to_sym => x]
             }
           end  
         else
-          puts "subject only"
+          #puts "subject only"
           spo[sub].each{|x|
             pred = x[0]
             x[1].each{|y| 

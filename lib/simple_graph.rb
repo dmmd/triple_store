@@ -10,10 +10,10 @@ module SimpleGraph
       puts "graph initialized\n"
     end
 
-    def add(sub, pred, obj)
-      add_to_index(@spo, sub, pred, obj)
-      add_to_index(@pos, pred, obj, sub)
-      add_to_index(@osp, obj, sub, pred)
+    def add(subj, pred, obj)
+      add_to_index(@spo, subj, pred, obj)
+      add_to_index(@pos, pred, obj, subj)
+      add_to_index(@osp, obj, subj, pred)
     end
 
     def add_to_index(index, a, b, c)
@@ -28,14 +28,16 @@ module SimpleGraph
 
     def remove(sub, pred, obj)
      triples(sub, pred, obj).each{|triple|
-       remove_from_index(@spo, triple[0][:sub], triple[0][:pred], triple[0][:obj])
-       remove_from_index(@pos, triple[0][:pred], triple[0][:obj], triple[0][:sub])
-       remove_from_index(@osp, triple[0][:obj], triple[0][:sub], triple[0][:pred])
+       remove_from_index(@spo, triple[0][:subj], triple[0][:pred], triple[0][:obj])
+       remove_from_index(@pos, triple[0][:pred], triple[0][:obj], triple[0][:subj])
+       remove_from_index(@osp, triple[0][:obj], triple[0][:subj], triple[0][:pred])
      }
     end
     
     def remove_from_index(index, a, b, c)
-      puts "NOT IMPLEMENTED YET"
+      bset = index[a]
+      cset = bset[b]      
+      cset.slice! cset.index c
     end
     
     def inspect
@@ -44,34 +46,50 @@ module SimpleGraph
       puts "OSP: " << @osp.to_s
     end
     
-    def triples(sub, pred, obj)
+    def triples(subj, pred, obj)
       result = Array.new
-      if sub != nil
+      if subj != nil
         if pred != nil
           if obj != nil
-            if spo[sub][pred].include? obj
+            if spo[subj][pred].include? obj
               #puts "subject predicate and object"
-              result.push ["sub".to_sym => sub, "pred".to_sym => pred, "obj".to_sym => obj]
+              result.push ["subj".to_sym => subj, "pred".to_sym => pred, "obj".to_sym => obj]
             end
           else
             #puts "subject and predicate"
-            spo[sub][pred].each{|x| 
-              result.push ["sub".to_sym => sub, "pred".to_sym => pred, "obj".to_sym => x]
+            spo[subj][pred].each{|x| 
+              result.push ["subj".to_sym => subj, "pred".to_sym => pred, "obj".to_sym => x]
             }
           end  
         else
           #puts "subject only"
-          spo[sub].each{|x|
+          spo[subj].each{|x|
             pred = x[0]
             x[1].each{|y| 
-              result.push ["sub".to_sym => sub, "pred".to_sym => pred, "obj".to_sym => y ]
+              result.push ["subj".to_sym => subj, "pred".to_sym => pred, "obj".to_sym => y ]
             } 
           }
         end
       elsif pred != nil
-        puts "predicate found"
+        if obj! != nil
+          pos[pred][obj].each{|x|
+            result.push ["subj".to_sym => x, "pred".to_sym => pred, "obj".to_sym => obj]
+          }
+        else 
+          pos[pred].each{|x|
+            obj = x[0]
+            x[1].each{|y|
+              result.push ["subj".to_sym => y, "pred".to_sym => pred, "obj".to_sym => obj]
+            }
+          }
+        end
       elsif obj != nil
-        puts "object found"
+        osp[obj].each{|x|
+          subj = x[0]
+          x[1].each{|y|
+            result.push ["subj".to_sym => subj, "pred".to_sym => y, "obj".to_sym => obj]
+          }
+        }
       end
       return result
     end

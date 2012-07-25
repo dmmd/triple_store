@@ -58,9 +58,9 @@ module SimpleGraph
             end
           else
             #puts "subject and predicate"
-            spo[subj][pred].each{|x| 
+            spo[subj][pred].each do |x| 
               result.push ["subj".to_sym => subj, "pred".to_sym => pred, "obj".to_sym => x]
-            }
+            end
           end  
         else
           #puts "subject only"
